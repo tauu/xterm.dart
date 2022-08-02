@@ -299,13 +299,13 @@ class _TerminalViewState extends State<TerminalView> {
           widget.terminal.refresh();
         }
       },
-      onPanStart: (detail) {
+      onHorizontalDragStart: (detail) {
         final pos = detail.localPosition;
         final offset = getMouseOffset(pos.dx, pos.dy);
         widget.terminal.onPanStart(offset);
         widget.terminal.refresh();
       },
-      onPanUpdate: (detail) {
+      onHorizontalDragUpdate: (detail) {
         final pos = detail.localPosition;
         final offset = getMouseOffset(pos.dx, pos.dy);
         widget.terminal.onPanUpdate(offset);
