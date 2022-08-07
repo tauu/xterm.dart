@@ -115,7 +115,7 @@ void csiDecSetMode(int mode, bool enabled, Terminal terminal) {
       // enable mouse tracking
       // 1000 refers to ext mode for extended mouse click area - otherwise only x <= 255-31
       if (enabled) {
-        // terminal.setMouseMode(MouseMode.vt200);
+        terminal.setMouseMode(MouseMode.vt200);
       } else {
         terminal.setMouseMode(MouseMode.none);
       }
@@ -145,9 +145,9 @@ void csiDecSetMode(int mode, bool enabled, Terminal terminal) {
       break;
     case 1006:
       if (enabled) {
-        // terminal.setMouseExtMode(MouseExt.sgr);
+        terminal.setExtendedMouseMode(ExtendedMouseMode.sgr);
       } else {
-        // terminal.setMouseExtMode(MouseExt.none);
+        terminal.setExtendedMouseMode(ExtendedMouseMode.none);
       }
       break;
     case 1048:

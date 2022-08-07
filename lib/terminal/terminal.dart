@@ -193,8 +193,12 @@ class Terminal
   bool _slowMotion = false;
   bool get slowMotion => _slowMotion;
 
+  /// Mouse Tracking Mode
   MouseMode _mouseMode = MouseMode.none;
   MouseMode get mouseMode => _mouseMode;
+
+  ExtendedMouseMode _extendedMouseMode = ExtendedMouseMode.none;
+  ExtendedMouseMode get extendedMouseMode => _extendedMouseMode;
 
   @override
   final TerminalTheme theme;
@@ -359,6 +363,14 @@ class Terminal
 
   void setMouseMode(MouseMode mode) {
     _mouseMode = mode;
+  }
+
+  void setExtendedMouseMode(ExtendedMouseMode mode) {
+    _extendedMouseMode = mode;
+  }
+
+  void setMouse(bool enabled) {
+    _mouse = enabled;
   }
 
   void useMainBuffer() {
@@ -673,22 +685,46 @@ class Terminal
 
   @override
   void onMouseTap(Position position) {
-    mouseMode.onTap(this, position);
+    // If an extended mouse mode is that, the protocol of the extended mode
+    // is always used.
+    if (extendedMouseMode != ExtendedMouseMode.none) {
+      extendedMouseMode.onTap(this, position);
+    } else {
+      mouseMode.onTap(this, position);
+    }
   }
 
   @override
   onMouseDoubleTap(Position position) {
-    mouseMode.onDoubleTap(this, position);
+    // If an extended mouse mode is that, the protocol of the extended mode
+    // is always used.
+    if (extendedMouseMode != ExtendedMouseMode.none) {
+      extendedMouseMode.onDoubleTap(this, position);
+    } else {
+      mouseMode.onDoubleTap(this, position);
+    }
   }
 
   @override
   void onPanStart(Position position) {
-    mouseMode.onPanStart(this, position);
+    // If an extended mouse mode is that, the protocol of the extended mode
+    // is always used.
+    if (extendedMouseMode != ExtendedMouseMode.none) {
+      extendedMouseMode.onPanStart(this, position);
+    } else {
+      mouseMode.onPanStart(this, position);
+    }
   }
 
   @override
   void onPanUpdate(Position position) {
-    mouseMode.onPanUpdate(this, position);
+    // If an extended mouse mode is that, the protocol of the extended mode
+    // is always used.
+    if (extendedMouseMode != ExtendedMouseMode.none) {
+      extendedMouseMode.onPanUpdate(this, position);
+    } else {
+      mouseMode.onPanUpdate(this, position);
+    }
   }
 
   @override
