@@ -200,6 +200,11 @@ class Terminal
   ExtendedMouseMode _extendedMouseMode = ExtendedMouseMode.none;
   ExtendedMouseMode get extendedMouseMode => _extendedMouseMode;
 
+  /// Flag to disable Mouse Tracking and use the default mouse handling for
+  /// text selection.
+  bool _mouse = true;
+  bool get mouse => _mouse;
+
   @override
   final TerminalTheme theme;
 
@@ -685,6 +690,12 @@ class Terminal
 
   @override
   void onMouseTap(Position position) {
+    // If the terminal mouse is disabled, use the none MouseMode, which handles
+    // selection of text on the terminal.
+    if (!_mouse) {
+      MouseMode.none.onTap(this, position);
+      return;
+    }
     // If an extended mouse mode is that, the protocol of the extended mode
     // is always used.
     if (extendedMouseMode != ExtendedMouseMode.none) {
@@ -696,6 +707,12 @@ class Terminal
 
   @override
   onMouseDoubleTap(Position position) {
+    // If the terminal mouse is disabled, use the none MouseMode, which handles
+    // selection of text on the terminal.
+    if (!_mouse) {
+      MouseMode.none.onDoubleTap(this, position);
+      return;
+    }
     // If an extended mouse mode is that, the protocol of the extended mode
     // is always used.
     if (extendedMouseMode != ExtendedMouseMode.none) {
@@ -707,6 +724,12 @@ class Terminal
 
   @override
   void onPanStart(Position position) {
+    // If the terminal mouse is disabled, use the none MouseMode, which handles
+    // selection of text on the terminal.
+    if (!_mouse) {
+      MouseMode.none.onPanStart(this, position);
+      return;
+    }
     // If an extended mouse mode is that, the protocol of the extended mode
     // is always used.
     if (extendedMouseMode != ExtendedMouseMode.none) {
@@ -718,6 +741,12 @@ class Terminal
 
   @override
   void onPanUpdate(Position position) {
+    // If the terminal mouse is disabled, use the none MouseMode, which handles
+    // selection of text on the terminal.
+    if (!_mouse) {
+      MouseMode.none.onPanUpdate(this, position);
+      return;
+    }
     // If an extended mouse mode is that, the protocol of the extended mode
     // is always used.
     if (extendedMouseMode != ExtendedMouseMode.none) {
