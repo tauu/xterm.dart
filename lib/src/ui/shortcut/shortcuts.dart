@@ -60,8 +60,7 @@ class TerminalShortcut<T extends Intent> {
   }
 
   /// Generate a list of default shortcuts for the current platform.
-  static List<TerminalShortcut> get defaults {
-    return <TerminalShortcut>[
+  static final List<TerminalShortcut> defaults = <TerminalShortcut>[
       TerminalShortcut<CopySelectionTextIntent>.platformDefault(
         LogicalKeyboardKey.keyC,
         CopySelectionTextIntent.copy,
@@ -77,8 +76,7 @@ class TerminalShortcut<T extends Intent> {
         const SelectAllTextIntent(SelectionChangedCause.keyboard),
         TerminalShortcut.defaultSelectAll,
       ),
-    ];
-  }
+  ];
 
   /// Default handler for [CopySelectionTextIntent].
   static Object? defaultCopy(
